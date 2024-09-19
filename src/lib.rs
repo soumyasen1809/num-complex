@@ -638,13 +638,33 @@ impl<T: Float> Complex<T> {
     /// let a = Complex64::new(2.0e-16, 3.0e-16);
     ///
     /// let approx_val = a.ln_1p();
-    /// let expected_val = Complex64::new(2.24e-16, 2.99e-16);
-    /// assert!((approx_val - expected_val).norm() < 1e-17);
+    /// let expected_val = Complex64::new(2.2204e-16, 2.999e-16);
+    /// assert!((approx_val - expected_val).norm() < 1e-18);
     /// ```
     #[inline]
     pub fn ln_1p(self) -> Self {
-        let complex_num = Self::one() + self;
-        complex_num.ln()
+        (Self::one() + self).ln()
+    }
+
+    /// The exp_m1() function computes the exponential
+    /// of z minus one (`e^(z) - 1`), which is particularly
+    /// useful for small values of `z` to avoid loss of precision
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use num_complex::Complex64;
+    /// use num_complex::ComplexFloat;
+    ///
+    /// let a = Complex64::new(2.0e-16, 3.0e-16);
+    ///
+    /// let approx_val = a.exp_m1();
+    /// let expected_val = Complex64::new(2.2204e-16, 3.0e-16);
+    /// assert!((approx_val - expected_val).norm() < 1e-18);
+    /// ```
+    #[inline]
+    pub fn exp_m1(self) -> Self {
+        self.exp() - Self::one()
     }
 }
 

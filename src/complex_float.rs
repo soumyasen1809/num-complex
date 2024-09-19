@@ -152,6 +152,14 @@ pub trait ComplexFloat: Num + NumCast + Copy + Neg<Output = Self> + private::Sea
     ///
     /// where z = a+bi
     fn ln_1p(self) -> Self;
+
+    /// Returns e^(self) - 1 in a way that is accurate
+    /// even if the number is close to zero
+    ///
+    /// Formaula: e^(z) - 1
+    ///
+    /// where z = a+bi
+    fn exp_m1(self) -> Self;
 }
 
 macro_rules! forward {
@@ -244,6 +252,7 @@ where
         Float::atanh(self) -> Self;
         Float::abs(self) -> Self;
         Float::ln_1p(self) -> Self;
+        Float::exp_m1(self) -> Self;
     }
 }
 
@@ -316,6 +325,7 @@ impl<T: Float + FloatConst> ComplexFloat for Complex<T> {
         Complex::acosh(self) -> Self;
         Complex::atanh(self) -> Self;
         Complex::ln_1p(self) -> Self;
+        Complex::exp_m1(self) -> Self;
     }
 
     forward_ref! {

@@ -2474,6 +2474,22 @@ pub(crate) mod test {
                 ));
             }
         }
+
+        #[test]
+        fn test_ln_1p() {
+            for &c in all_consts.iter() {
+                // ln_1p(z) = ln(1+z)
+                assert!(close(c.ln_1p(), (1.0 + c).ln()));
+            }
+        }
+
+        #[test]
+        fn test_exp_m1() {
+            for &c in all_consts.iter() {
+                // exp_m1(z) = exp(z) - 1
+                assert!(close(c.exp_m1(), (c).exp() - 1.0));
+            }
+        }
     }
 
     // Test both a + b and a += b

@@ -624,6 +624,12 @@ impl<T: Float> Complex<T> {
     pub fn fdiv(self, other: Complex<T>) -> Complex<T> {
         self * other.finv()
     }
+
+    #[inline]
+    pub fn ln_1p(self) -> Self {
+        let complex_num = Self::one() + self;
+        complex_num.ln()
+    }
 }
 
 #[cfg(any(feature = "std", feature = "libm"))]

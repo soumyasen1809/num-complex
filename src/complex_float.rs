@@ -144,6 +144,10 @@ pub trait ComplexFloat: Num + NumCast + Copy + Neg<Output = Self> + private::Sea
     ///
     /// Formula: `a+bi -> a-bi`
     fn conj(self) -> Self;
+
+    /// Returns ln(1+n) (natural logarithm) more accurately than if the operations
+    /// were performed separately
+    fn ln_1p(self) -> Self;
 }
 
 macro_rules! forward {
@@ -235,6 +239,7 @@ where
         Float::acosh(self) -> Self;
         Float::atanh(self) -> Self;
         Float::abs(self) -> Self;
+        Float::ln_1p(self) -> Self;
     }
 }
 
@@ -306,6 +311,7 @@ impl<T: Float + FloatConst> ComplexFloat for Complex<T> {
         Complex::asinh(self) -> Self;
         Complex::acosh(self) -> Self;
         Complex::atanh(self) -> Self;
+        Complex::ln_1p(self) -> Self;
     }
 
     forward_ref! {

@@ -145,8 +145,12 @@ pub trait ComplexFloat: Num + NumCast + Copy + Neg<Output = Self> + private::Sea
     /// Formula: `a+bi -> a-bi`
     fn conj(self) -> Self;
 
-    /// Returns ln(1+n) (natural logarithm) more accurately than if the operations
-    /// were performed separately
+    /// Returns ln(1+n) (natural logarithm) more accurately
+    /// than if the operations were performed separately
+    ///
+    /// Formula: ln(1+z)
+    ///
+    /// where z = a+bi
     fn ln_1p(self) -> Self;
 }
 

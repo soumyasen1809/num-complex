@@ -625,6 +625,22 @@ impl<T: Float> Complex<T> {
         self * other.finv()
     }
 
+    /// The ln_1p() function computes the natural logarithm
+    /// of (1 + z), which is particularly useful for
+    /// small values of `z` to avoid loss of precision
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// use num_complex::Complex64;
+    /// use num_complex::ComplexFloat;
+    ///
+    /// let a = Complex64::new(2.0e-16, 3.0e-16);
+    ///
+    /// let approx_val = a.ln_1p();
+    /// let expected_val = Complex64::new(2.24e-16, 2.99e-16);
+    /// assert!((approx_val - expected_val).norm() < 1e-17);
+    /// ```
     #[inline]
     pub fn ln_1p(self) -> Self {
         let complex_num = Self::one() + self;
